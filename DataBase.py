@@ -33,19 +33,24 @@ class Database:
         self.conn.commit() #Confirma a inserção de dados
 
     #Método para alterar os dados de um usuário existente no banco de dados
-    def alterar(self, id_usuario, nm_usuario, end_usuario, tl_usuario, email_usuario,cpf_usuario,dat_nasc_usuario,login_usuario,senha_usuario,id_tip):
+    def alterarUsuario(self, id_usuario, nm_usuario, end_usuario, tl_usuario, email_usuario,cpf_usuario,dat_nasc_usuario,login_usuario,senha_usuario,id_tip):
             self.cursor.execute("UPDATE tb_usuario SET nm_usuario=%s, end_usuario=%s, tl_usuario=%s, email_usuario=%s, cpf_usuario=%s, dat_nasc_usuario=%s, login_usuario=%s, senha_usuario=%s WHERE id_usuario=%s",(nm_usuario,end_usuario,tl_usuario,email_usuario,cpf_usuario,dat_nasc_usuario,login_usuario,senha_usuario,id_tip,id_usuario)) # Atualiza os dados do usuário com o id fornecido
             self.conn.commit() #Confirma a atualização dos dados 
 
     #Método para excluir um usuário do banco de dados
-    def excluir(self,id_usuario):
+    def excluirUsuario(self,id_usuario):
             self.cursor.execute("DELETE FROM tb_usuario WHERE id_usuario=%s",(id_usuario,))
             self.conn.commit()
 
     #Método para buscar os dados de um usuário no banco de dados
-    def buscar(self,id_usuario):
+    def buscarUsuario(self,id_usuario):
             self.cursor.execute("SELECT * FROM tb_usuario WHERE id_usuario=%s",(id_usuario,))
             return self.cursor.fetchone()
+    
+    #Método para buscar os dados de um fornecedor no banco de dados
+    def buscarFornecedor(self,id_fornecedor):
+          self.cursor.execute("SELECT * FROM tb_fornecedor WHERE id_fornecedor=%s",(id_fornecedor))
+          return self.cursor.fetchone()
 
     def __del__(self):
             self.conn.close()
