@@ -35,44 +35,44 @@ def CadastrarProduto():
     NomeLabel = Label(CadastroFrame, text="Produto:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     NomeLabel.place(x=5, y=5)
     NomeEntry = ttk.Entry(CadastroFrame, width=30)
-    NomeEntry.place(x=120, y=10)
+    NomeEntry.place(x=100, y=10)
 
     QtLabel = Label(CadastroFrame, text="Quantidade:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     QtLabel.place(x=5, y=50)
-    QtEntry = ttk.Entry(CadastroFrame, width=30)
-    QtEntry.place(x=120, y=50)
+    QtEntry = ttk.Entry(CadastroFrame, width=10)
+    QtEntry.place(x=100, y=50)
 
     VlLabel = Label(CadastroFrame, text="Valor(R$):", font=("Times New Roman", 12), bg="PURPLE", fg="White")
-    VlLabel.place(x=5, y=95)
-    VlEntry = ttk.Entry(CadastroFrame, width=30)
-    VlEntry.place(x=120, y=95)
+    VlLabel.place(x=150, y=50)
+    VlEntry = ttk.Entry(CadastroFrame, width=10)
+    VlEntry.place(x=230, y=50)
 
     CategoriaLabel = Label(CadastroFrame, text="Categoria:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
-    CategoriaLabel.place(x=5, y=140)
-    CategoriaEntry = ttk.Entry(CadastroFrame, width=30)
-    CategoriaEntry.place(x=120, y=140)
+    CategoriaLabel.place(x=5, y=95)
+    CategoriaEntry = ttk.Entry(CadastroFrame, width=5)
+    CategoriaEntry.place(x=100, y=95)
 
-    MarcaLabel = Label(CadastroFrame, text="Marca:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
-    MarcaLabel.place(x=5, y=185)
-    MarcaEntry = ttk.Entry(CadastroFrame, width=30)
-    MarcaEntry.place(x=120, y=185)
+    MarcaLabel = Label(CadastroFrame, text="Marca:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
+    MarcaLabel.place(x=150, y=95)
+    MarcaEntry = ttk.Entry(CadastroFrame, width=5)
+    MarcaEntry.place(x=230, y=95)
 
-    FornecedorLabel = Label(CadastroFrame, text="Fornecedor:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
-    FornecedorLabel.place(x=5, y=210)
-    FornecedorEntry = ttk.Entry(CadastroFrame, width=30)
-    FornecedorEntry.place(x=120, y=210)
+    FornecedorLabel = Label(CadastroFrame, text="Fornecedor:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
+    FornecedorLabel.place(x=5, y=140)
+    FornecedorEntry = ttk.Entry(CadastroFrame, width=5)
+    FornecedorEntry.place(x=100, y=140)
 
-    DescLabel = Label(CadastroFrame, text="Descrição:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
-    DescLabel.place(x=5, y=240)
-    DescEntry = ttk.Entry(CadastroFrame, width=30)
-    DescEntry.place(x=120, y=240)
+    DescLabel = Label(CadastroFrame, text="Descrição:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
+    DescLabel.place(x=5, y=185)
+    DescText = Text(CadastroFrame, width=30,  height=7, wrap=WORD)
+    DescText.place(x=100, y=185)
 
     # Botão para salvar o cadastro
     def SalvarCadastro():
         nm_produto = NomeEntry.get()
         qt_produto = QtEntry.get()
         vl_produto = VlEntry.get()
-        ds_produto = DescEntry.get()
+        ds_produto = DescText.get(1.0, END).strip()
         id_categoria = CategoriaEntry.get()
         id_marca = MarcaEntry.get()
         id_fornecedor = FornecedorEntry.get()
@@ -97,10 +97,10 @@ def CadastrarProduto():
             messagebox.showerror("Erro", f"Erro ao cadastrar produto: {e}")
 
     SalvarButton = ttk.Button(CadastroFrame, text="Cadastrar", width=10, command=SalvarCadastro)
-    SalvarButton.place(x=150, y=240)
+    SalvarButton.place(x=80, y=350)
 
     VoltarButton = ttk.Button(CadastroFrame, text="Voltar", width=10, command=CadastroFrame.destroy)
-    VoltarButton.place(x=150, y=275)
+    VoltarButton.place(x=320, y=350)
 # Função para abrir a tela de alteração de dados do produto
 def AlterarProduto():
     id_produto = ProdutoEntry.get()  # Obtém o valor do código do produto
@@ -127,56 +127,56 @@ def AlterarProduto():
     NomeLabel = Label(AlterarJanela, text="Produto:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     NomeLabel.place(x=5, y=5)
     NomeEntry = ttk.Entry(AlterarJanela, width=30)
-    NomeEntry.place(x=120, y=10)
+    NomeEntry.place(x=100, y=10)
     NomeEntry.insert(0, produto[1])  # Preenche o campo com o nome
 
     QtLabel = Label(AlterarJanela, text="Quantidade:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     QtLabel.place(x=5, y=50)
-    QtEntry = ttk.Entry(AlterarJanela, width=30)
-    QtEntry.place(x=120, y=50)
+    QtEntry = ttk.Entry(AlterarJanela, width=10)
+    QtEntry.place(x=100, y=50)
     QtEntry.insert(0, produto[2])
 
     VlLabel = Label(AlterarJanela, text="Valor(R$):", font=("Times New Roman", 12), bg="PURPLE", fg="White")
-    VlLabel.place(x=5, y=95)
-    VlEntry = ttk.Entry(AlterarJanela, width=30)
-    VlEntry.place(x=120, y=95)
+    VlLabel.place(x=150, y=50)
+    VlEntry = ttk.Entry(AlterarJanela, width=10)
+    VlEntry.place(x=230, y=50)
     VlEntry.insert(0, produto[3])
 
     CategoriaLabel = Label(AlterarJanela, text="Categoria:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
-    CategoriaLabel.place(x=5, y=140)
-    CategoriaEntry = ttk.Entry(AlterarJanela, width=30)
-    CategoriaEntry.place(x=120, y=140)
+    CategoriaLabel.place(x=5, y=95)
+    CategoriaEntry = ttk.Entry(AlterarJanela, width=5)
+    CategoriaEntry.place(x=100, y=95)
     CategoriaEntry.insert(0, produto[5])
 
-    MarcaLabel = Label(AlterarJanela, text="Marca:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
-    MarcaLabel.place(x=5, y=185)
-    MarcaEntry = ttk.Entry(AlterarJanela, width=30)
-    MarcaEntry.place(x=120, y=185)
+    MarcaLabel = Label(AlterarJanela, text="Marca:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
+    MarcaLabel.place(x=150, y=95)
+    MarcaEntry = ttk.Entry(AlterarJanela, width=5)
+    MarcaEntry.place(x=230, y=95)
     MarcaEntry.insert(0, produto[6])
 
-    FornecedorLabel = Label(AlterarJanela, text="Fornecedor:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
-    FornecedorLabel.place(x=5, y=210)
-    FornecedorEntry = ttk.Entry(AlterarJanela, width=30)
-    FornecedorEntry.place(x=120, y=210)
+    FornecedorLabel = Label(AlterarJanela, text="Fornecedor:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
+    FornecedorLabel.place(x=5, y=140)
+    FornecedorEntry = ttk.Entry(AlterarJanela, width=5)
+    FornecedorEntry.place(x=100, y=140)
     FornecedorEntry.insert(0, produto[7])
 
-    DescLabel = Label(AlterarJanela, text="Descrição:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
-    DescLabel.place(x=5, y=240)
-    DescEntry = ttk.Entry(AlterarJanela, width=30)
-    DescEntry.place(x=120, y=240)
-    DescEntry.insert(0, produto[4])   
+    DescLabel = Label(AlterarJanela, text="Descrição:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
+    DescLabel.place(x=5, y=185)
+    DescText = Text(AlterarJanela, width=30,  height=7, wrap=WORD)
+    DescText.place(x=100, y=185)
+    DescText.insert(END, produto[4])   
 
     # Função para salvar as alterações no banco de dados
     def SalvarAlteracoes():
         nm_produto = NomeEntry.get()
         qt_produto = QtEntry.get()
         vl_produto = VlEntry.get()
-        ds_produto = DescEntry.get()
+        ds_produto = DescText.get(1.0, END).strip()
         id_categoria = CategoriaEntry.get()
         id_marca = MarcaEntry.get()
         id_fornecedor = FornecedorEntry.get()
 
-        if nm_produto or not qt_produto or not vl_produto or not id_categoria or not id_marca or not id_fornecedor or not ds_produto:
+        if nm_produto or not qt_produto or not vl_produto or not ds_produto or not id_categoria or not id_marca or not id_fornecedor:
             messagebox.showwarning("Aviso", "Por favor, preencha todos os campos.")
             return
 
@@ -185,7 +185,7 @@ def AlterarProduto():
                 UPDATE tb_produto
                 SET nm_produto = %s, qt_produto = %s, vl_produto = %s, id_categoria = %s, id_marca = %s, id_fornecedor = %s, ds_produto = %s
                 WHERE id_produto = %s
-            """, (nm_produto, qt_produto, vl_produto, id_categoria, id_marca, id_fornecedor, ds_produto,id_produto))
+            """, (nm_produto, qt_produto, vl_produto, id_categoria, id_marca, id_fornecedor, ds_produto, id_produto))
             db.conn.commit()  # Confirma as mudanças no banco de dados
             messagebox.showinfo("Sucesso", "Produto atualizado com sucesso.")
             AlterarJanela.destroy()  # Fecha a janela de alteração
@@ -219,10 +219,10 @@ def AlterarProduto():
 
     #Bortão que salva as alterações nos dados do produto
     SalvarButton = ttk.Button(AlterarJanela, text="Salvar Alterações", command=SalvarAlteracoes)
-    SalvarButton.place(x=80, y=220)
+    SalvarButton.place(x=80, y=350)
     # Botão de deletar produto
     DeletarButton = ttk.Button(AlterarJanela, text="Deletar", width=10, command=DeletarProduto)
-    DeletarButton.place(x=180, y=220)
+    DeletarButton.place(x=180, y=350)
     #Botão para retornar a tela de pesquisar produto
     VoltarButton = ttk.Button(AlterarJanela, text="Voltar", command=AlterarJanela.destroy)
     VoltarButton.place(x=320, y=350)
