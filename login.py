@@ -10,6 +10,7 @@ jan.title("Doceria - Login")
 jan.geometry("400x200")
 jan.configure(background="white")
 jan.resizable(width=False, height=False)
+jan.iconbitmap("icons/bala.ico")
 
 # Frame de Login
 loginFrame = Frame(jan, width=400, height=200, bg="PURPLE", relief="raise")
@@ -61,20 +62,23 @@ menuADM.geometry("400x300")
 menuADM.configure(background="purple")
 menuADM.resizable(width=False, height=False)
 menuADM.withdraw()  # Mantém a tela oculta até o login ser realizado com sucesso
+menuADM.iconbitmap("icons/bala.ico")
 
 # Funções para abrir as telas de Produto, Fornecedor, Marca e Usuário no menuADM
 def abrir_produto():
     menuADM.withdraw()  # Esconde o menu ADM
-    menuProduto.deiconify()  # Mostra a tela de produto
+    subprocess.run(["python", "TelaProduto.py"])  # Executa o script TelaProduto.py
+    menuADM.deiconify()  # Mostra a tela de produto
 
 def abrir_usuarios():
     menuADM.withdraw()  # Esconde o menu ADM
-    menuUsuarios.deiconify()  # Mostra a tela de gerenciamento de usuários
+    subprocess.run(["python","TelaCadastrarUsuario.py"])
+    menuADM.deiconify()  # Mostra a tela de gerenciamento de usuários
 
 def abrir_marca():
     menuADM.withdraw()  # Esconde o menu ADM
     subprocess.run(["python", "TelaMarca.py"])  # Executa o script TelaMarca.py
-    menuMarca.deiconify()  # Mostra a tela de marca
+    menuADM.deiconify()  # Mostra a tela de marca
 
 def abrir_fornecedor():
     menuADM.withdraw()  # Esconde o menu ADM
@@ -100,103 +104,27 @@ fornecedor_button.pack(pady=10)
 
 Button(menuADM, text="Sair", font=("Times New Roman", 15), command=sair).pack(pady=10)
 
-# Função para voltar ao menu ADM a partir da tela de Produto
-def voltar_produto():
-    menuProduto.withdraw()
-    menuADM.deiconify()
-
-# Criação da tela Produto
-menuProduto = Toplevel()
-menuProduto.title("Doceria - Produto")
-menuProduto.geometry("500x400")
-menuProduto.configure(background="purple")
-menuProduto.resizable(width=False, height=False)
-menuProduto.withdraw()  # Mantém a tela oculta até o botão "Produto" ser clicado
-
-label_produto = Label(menuProduto, text="Tela de Produto", font=("Arial", 20), bg="purple", fg="white")
-label_produto.pack(pady=50)
-
-# Botão para voltar ao menu ADM
-botao_voltar_produto = Button(menuProduto, text="Voltar", font=("Arial", 15), command=voltar_produto)
-botao_voltar_produto.pack(pady=20)
-
-# Função para voltar ao menu ADM a partir da tela de Fornecedor
-def voltar_fornecedor():
-    menuFornecedor.withdraw()
-    menuADM.deiconify()
-
-# Criação da tela Fornecedor
-menuFornecedor = Toplevel()
-menuFornecedor.title("Doceria - Fornecedor")
-menuFornecedor.geometry("500x400")
-menuFornecedor.configure(background="purple")
-menuFornecedor.resizable(width=False, height=False)
-menuFornecedor.withdraw()  # Mantém a tela oculta até o botão "Fornecedor" ser clicado
-
-label_fornecedor = Label(menuFornecedor, text="Tela de Fornecedor", font=("Arial", 20), bg="purple", fg="white")
-label_fornecedor.pack(pady=50)
-
-# Botão para voltar ao menu ADM
-botao_voltar_fornecedor = Button(menuFornecedor, text="Voltar", font=("Arial", 15), command=voltar_fornecedor)
-botao_voltar_fornecedor.pack(pady=20)
-
-# Função para voltar ao menu ADM a partir da tela de Marca
-def voltar_marca():
-    menuMarca.withdraw()
-    menuADM.deiconify()
-
-# Criação da tela Marca
-menuMarca = Toplevel()
-menuMarca.title("Doceria - Marca")
-menuMarca.geometry("500x400")
-menuMarca.configure(background="purple")
-menuMarca.resizable(width=False, height=False)
-menuMarca.withdraw()  # Mantém a tela oculta até o botão "Marca" ser clicado
-
-label_marca = Label(menuMarca, text="Tela de Marca", font=("Arial", 20), bg="purple", fg="white")
-label_marca.pack(pady=50)
-
-# Botão para voltar ao menu ADM
-botao_voltar_marca = Button(menuMarca, text="Voltar", font=("Arial", 15), command=voltar_marca)
-botao_voltar_marca.pack(pady=20)
-
-# Função para voltar ao menu ADM a partir da tela de Gerenciamento de Usuários
-def voltar_usuarios():
-    menuUsuarios.withdraw()
-    menuADM.deiconify()
-
-# Criação da tela de Gerenciamento de Usuários
-menuUsuarios = Toplevel()
-menuUsuarios.title("Doceria - Gerenciamento de Usuários")
-menuUsuarios.geometry("500x400")
-menuUsuarios.configure(background="purple")
-menuUsuarios.resizable(width=False, height=False)
-menuUsuarios.withdraw()  # Mantém a tela oculta até o botão "Gerenciar Usuários" ser clicado
-
-label_usuarios = Label(menuUsuarios, text="Tela de Gerenciamento de Usuários", font=("Arial", 20), bg="purple", fg="white")
-label_usuarios.pack(pady=50)
-
-# Botão para voltar ao menu ADM
-botao_voltar_usuarios = Button(menuUsuarios, text="Voltar", font=("Arial", 15), command=voltar_usuarios)
-botao_voltar_usuarios.pack(pady=20)
 
     
 # Criação da tela menuUsuario
 menuUsuario = Toplevel()
 menuUsuario.title("Doceria - Menu Usuário")
-menuUsuario.geometry("500x400")
+menuUsuario.geometry("400x200")
 menuUsuario.configure(background="purple")
 menuUsuario.resizable(width=False, height=False)
 menuUsuario.withdraw()  # Mantém a tela oculta até o login ser realizado com sucesso
+menuUsuario.iconbitmap("icons/bala.ico")
 
 # Funções para abrir as telas de Produto e Minha Conta no menuUsuario
 def abrir_produto_usuario():
     menuUsuario.withdraw()  # Esconde o menuUsuario
-    menuProduto_usuario.deiconify()  # Mostra a tela de produto
+    subprocess.run(["python","TelaCadastrarUsuario.py"])
+    menuUsuario.deiconify()  # Mostra a tela de produto
 
 def abrir_minha_conta():
     menuUsuario.withdraw()  # Esconde o menuUsuario
-    menuMinhaConta.deiconify()  # Mostra a tela "Minha Conta"
+    subprocess.run(["python", "TelaMinhaConta.py"])
+    menuUsuario.deiconify()  # Mostra a tela "Minha Conta"
 
 def sair_usuario():
     menuUsuario.withdraw()  # Esconde o menuUsuario
@@ -223,6 +151,7 @@ menuProduto_usuario.geometry("500x400")
 menuProduto_usuario.configure(background="purple")
 menuProduto_usuario.resizable(width=False, height=False)
 menuProduto_usuario.withdraw()  # Mantém a tela oculta até o botão "Produto" ser clicado
+menuProduto_usuario.iconbitmap("icons/bala.ico")
 
 label_produto = Label(menuProduto_usuario, text="Tela de Produto", font=("Arial", 20), bg="purple", fg="white")
 label_produto.pack(pady=50)
@@ -243,6 +172,7 @@ menuMinhaConta.geometry("500x400")
 menuMinhaConta.configure(background="purple")
 menuMinhaConta.resizable(width=False, height=False)
 menuMinhaConta.withdraw()  # Mantém a tela oculta até o botão "Minha Conta" ser clicado
+menuMinhaConta.iconbitmap("icons/bala.ico")
 
 label_minha_conta = Label(menuMinhaConta, text="Tela de Minha Conta", font=("Arial", 20), bg="purple", fg="white")
 label_minha_conta.pack(pady=50)
