@@ -171,12 +171,12 @@ def AlterarProduto():
         nm_produto = NomeEntry.get()
         qt_produto = QtEntry.get()
         vl_produto = VlEntry.get()
-        ds_produto = DescText.get(1.0, END).strip()
+        ds_produto = DescText.get("1.0", END).strip()  # Ajustado
         id_categoria = CategoriaEntry.get()
         id_marca = MarcaEntry.get()
         id_fornecedor = FornecedorEntry.get()
 
-        if nm_produto or not qt_produto or not vl_produto or not ds_produto or not id_categoria or not id_marca or not id_fornecedor:
+        if not nm_produto or not qt_produto or not vl_produto or not id_categoria or not id_marca or not id_fornecedor or not ds_produto:
             messagebox.showwarning("Aviso", "Por favor, preencha todos os campos.")
             return
 
@@ -186,9 +186,9 @@ def AlterarProduto():
                 SET nm_produto = %s, qt_produto = %s, vl_produto = %s, id_categoria = %s, id_marca = %s, id_fornecedor = %s, ds_produto = %s
                 WHERE id_produto = %s
             """, (nm_produto, qt_produto, vl_produto, id_categoria, id_marca, id_fornecedor, ds_produto, id_produto))
-            db.conn.commit()  # Confirma as mudanças no banco de dados
+            db.conn.commit()
             messagebox.showinfo("Sucesso", "Produto atualizado com sucesso.")
-            AlterarJanela.destroy()  # Fecha a janela de alteração
+            AlterarJanela.destroy()
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao atualizar produto: {e}")
 
