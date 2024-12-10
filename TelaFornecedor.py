@@ -89,7 +89,7 @@ def CadastrarFornecedor():
             FornecedorFrame.pack()
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao cadastrar fornecedor: {e}")
-            
+
     SalvarButton = ttk.Button(CadastroFrame, text="Cadastrar", width=10, command=SalvarCadastro)
     SalvarButton.place(x=150, y=240)
 
@@ -173,11 +173,42 @@ def AlterarFornecedor():
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao atualizar fornecedor: {e}")
 
-    SalvarButton = ttk.Button(AlterarJanela, text="Salvar Alterações", command=SalvarAlteracoes)
-    SalvarButton.place(x=150, y=220)
+    def DeletarFornecedor():
+        id_fornecedor = FornecedorEntry.get()  # Obtém o valor do código do fornecedor
+        if not id_fornecedor:
+            messagebox.showwarning("Aviso", "Por favor, insira o código do fornecedor para deletar.")
+            return
 
+        # Conectar ao banco de dados
+        db = Database()
+        try:
+            db.cursor.execute("SELECT * FROM tb_fornecedor WHERE id_fornecedor = %s", (id_fornecedor,))
+            fornecedor = db.cursor.fetchone()
+
+            if not fornecedor:
+                messagebox.showwarning("Aviso", "Fornecedor não encontrado.")
+                return
+
+            # Confirmação para deletar
+            confirm = messagebox.askyesno("Confirmação", f"Tem certeza que deseja excluir o fornecedor: {fornecedor[1]}?")
+            if confirm:
+                db.cursor.execute("DELETE FROM tb_fornecedor WHERE id_fornecedor = %s", (id_fornecedor,))
+                db.conn.commit()  # Confirma a exclusão no banco de dados
+                messagebox.showinfo("Sucesso", "Fornecedor deletado com sucesso.")
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao deletar fornecedor: {e}")
+
+    #Bortão que salva as alterações nos dados do fornecedor
+    SalvarButton = ttk.Button(AlterarJanela, text="Salvar Alterações", command=SalvarAlteracoes)
+    SalvarButton.place(x=80, y=220)
+    # Botão de deletar fornecedor
+    DeletarButton = ttk.Button(AlterarJanela, text="Deletar", width=10, command=DeletarFornecedor)
+    DeletarButton.place(x=180, y=220)
+    #Botão para retornar a tela de pesquisar fornecedor
     VoltarButton = ttk.Button(AlterarJanela, text="Voltar", command=AlterarJanela.destroy)
-    VoltarButton.place(x=150, y=260)
+    VoltarButton.place(x=320, y=350)
+
+
 
 
 # Botões principais
