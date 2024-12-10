@@ -119,10 +119,10 @@ def abrir_produto_usuario():
     subprocess.run(["python","TelaCadastrarUsuario.py"])
     menuUsuario.deiconify()  # Mostra a tela de produto
 
-def abrir_minha_conta():
-    menuUsuario.withdraw()  # Esconde o menuUsuario
-    subprocess.run(["python", "TelaMinhaConta.py"])
-    menuUsuario.deiconify()  # Mostra a tela "Minha Conta"
+#def abrir_minha_conta():
+  #  menuUsuario.withdraw()  # Esconde o menuUsuario
+   # subprocess.run(["python", "TelaMinhaConta.py"])
+   # menuUsuario.deiconify()  # Mostra a tela "Minha Conta"
 
 def sair_usuario():
     menuUsuario.withdraw()  # Esconde o menuUsuario
@@ -132,8 +132,8 @@ def sair_usuario():
 produto_button_usuario = Button(menuUsuario, text="Produto", font=("Time New Roman", 15), command=abrir_produto_usuario)
 produto_button_usuario.pack(pady=10)
 
-minha_conta_button = Button(menuUsuario, text="Minha Conta", font=("Time New Roman", 15), command=abrir_minha_conta)
-minha_conta_button.pack(pady=10)
+#minha_conta_button = Button(menuUsuario, text="Minha Conta", font=("Time New Roman", 15), command=abrir_minha_conta)
+#minha_conta_button.pack(pady=10)
 
 Button(menuUsuario, text="Sair", font=("Times New Roman", 15), command=sair_usuario).pack(pady=20)
 
