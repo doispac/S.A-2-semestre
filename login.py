@@ -104,8 +104,6 @@ fornecedor_button.pack(pady=10)
 
 Button(menuADM, text="Sair", font=("Times New Roman", 15), command=sair).pack(pady=10)
 
-
-    
 # Criação da tela menuUsuario
 menuUsuario = Toplevel()
 menuUsuario.title("Doceria - Menu Usuário")
@@ -138,48 +136,6 @@ minha_conta_button = Button(menuUsuario, text="Minha Conta", font=("Time New Rom
 minha_conta_button.pack(pady=10)
 
 Button(menuUsuario, text="Sair", font=("Times New Roman", 15), command=sair_usuario).pack(pady=20)
-
-# Função para voltar ao menuUsuario a partir da tela Produto
-def voltar_produto_usuario():
-    menuProduto_usuario.withdraw()
-    menuUsuario.deiconify()
-
-# Criação da tela Produto
-menuProduto_usuario = Toplevel()
-menuProduto_usuario.title("Doceria - Produto")
-menuProduto_usuario.geometry("500x400")
-menuProduto_usuario.configure(background="purple")
-menuProduto_usuario.resizable(width=False, height=False)
-menuProduto_usuario.withdraw()  # Mantém a tela oculta até o botão "Produto" ser clicado
-menuProduto_usuario.iconbitmap("icons/bala.ico")
-
-label_produto = Label(menuProduto_usuario, text="Tela de Produto", font=("Arial", 20), bg="purple", fg="white")
-label_produto.pack(pady=50)
-
-# Botão para voltar ao menuUsuario
-botao_voltar_produto = Button(menuProduto_usuario, text="Voltar", font=("Arial", 15), command=voltar_produto_usuario)
-botao_voltar_produto.pack(pady=20)
-
-# Função para voltar ao menuUsuario a partir da tela "Minha Conta"
-def voltar_minha_conta():
-    menuMinhaConta.withdraw()
-    menuUsuario.deiconify()
-
-# Criação da tela "Minha Conta"
-menuMinhaConta = Toplevel()
-menuMinhaConta.title("Doceria - Minha Conta")
-menuMinhaConta.geometry("500x400")
-menuMinhaConta.configure(background="purple")
-menuMinhaConta.resizable(width=False, height=False)
-menuMinhaConta.withdraw()  # Mantém a tela oculta até o botão "Minha Conta" ser clicado
-menuMinhaConta.iconbitmap("icons/bala.ico")
-
-label_minha_conta = Label(menuMinhaConta, text="Tela de Minha Conta", font=("Arial", 20), bg="purple", fg="white")
-label_minha_conta.pack(pady=50)
-
-# Botão para voltar ao menuUsuario
-botao_voltar_minha_conta = Button(menuMinhaConta, text="Voltar", font=("Arial", 15), command=voltar_minha_conta)
-botao_voltar_minha_conta.pack(pady=20)
 
 # Loop principal da interface
 jan.mainloop()    
