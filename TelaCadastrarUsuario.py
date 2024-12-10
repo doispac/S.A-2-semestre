@@ -9,6 +9,7 @@ jan.title("Painel de Usuários")  # Define o título da janela
 jan.geometry("300x200")  # Define o tamanho da janela
 jan.configure(background="PURPLE")  # Define a cor de fundo da janela
 jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
+jan.iconbitmap("icons/bala.ico")
 
 # Cria o frame principal da aplicação
 UsuarioFrame = Frame(jan, width=300, height=200, bg="PURPLE", relief="raise")
