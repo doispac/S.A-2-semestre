@@ -9,6 +9,7 @@ jan.title("Painel Marca")  # Define um título para a janela
 jan.geometry("300x150")  # Define o tamanho da janela
 jan.configure(background="PURPLE")  # Configura a cor de fundo da janela
 jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
+jan.iconbitmap("icons/bala.ico")
 
 # Frame para Fornecedor
 MarcaFrame = Frame(jan, width=300, height=150, bg="PURPLE", relief="raise")  # Cria o frame principal
