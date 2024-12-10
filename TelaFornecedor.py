@@ -1,115 +1,192 @@
-from tkinter import * #IMPORTA TODOS OS MODULOS DO TKINTER
-from tkinter import messagebox #IMPORTA O MÓDULO DE CAIXA DE TEXTO DO TKINTER
+from tkinter import *  # Importa todos os módulos do tkinter
+from tkinter import messagebox  # Importa o módulo de caixa de texto do tkinter
 from tkinter import ttk
-from turtle import register_shape  #IMPORTA O MÓDULO DE WIDGETS TEMÁTICOS DO TKINTER
-from DataBase import Database #IMPORTA A CLASSE DataBase DO MÓDULO DataBase
+from DataBase import Database  # Importa a classe Database do módulo DataBase
 
-jan = Tk() #CRIA UMA INSTÂNCIA DA JANELA PRINCIAL
-jan.title("Painel Forcenedor") #DEFINE UM TÍTULO DA JANELA
-jan.geometry("400x200") #DEFINE O TAMANHO DA JANELA
-jan.configure(background="white") #CONFIGURA A COR DE FUNDO DA JANELA
-jan.resizable(width=False,height=False)#IMPEDE QUE A JANELA SEJA REDIMENCIONADA
+# Janela principal
+jan = Tk()  # Cria uma instância da janela principal
+jan.title("Painel Fornecedor")  # Define um título para a janela
+jan.geometry("300x200")  # Define o tamanho da janela
+jan.configure(background="white")  # Configura a cor de fundo da janela
+jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
 
-FornecedorFrame = Frame(jan,width=400,height=200,bg="PURPLE",relief="raise")#CRIA A FRAME TelaFornecedor
-FornecedorFrame.pack()#POSICIONA A FRAME TelaFornecedor
+# Frame para Fornecedor
+FornecedorFrame = Frame(jan, width=600, height=300, bg="PURPLE", relief="raise")  # Cria o frame principal
+FornecedorFrame.pack()  # Posiciona o frame
 
+# Adicionar campos para inserir fornecedor
+FornecedorLabel = Label(
+    FornecedorFrame, text="Cod. Fornecedor:", font=("Times New Roman", 18), bg="PURPLE", fg="White"
+)  # Label para o código do fornecedor
+FornecedorLabel.place(x=5, y=40)
 
-#ADICIONAR CAMPOS DE USUÁRIO E SENHA
-FornecedorLabel = Label(FornecedorFrame,text="Cod.Fornecedor: ",font=("Times New Roman",18),bg="PURPLE",fg="White")#CRIA UM LABEL PARA O USUÁRIO
-FornecedorLabel.place(x=5,y=40)
-
-FornecedorEntry = ttk.Entry(FornecedorFrame,width=10)#CRIA UM CAMPO DE ENTRADA PARA O USUÁRIO
-FornecedorEntry.place(x=180,y=50) #POSICIONA O CAMPO DE ENTRADA
-
-
-#FUNÇÃO DO LOGIN
-def Fornecedor():
-    id_fornecedor = FornecedorEntry.get() #Obtém o valor do campo de entrada de fornecedor
-
-    #Conecta ao banco de dados
-    db = Database() #Cria uma instância da classe Database
-    db.cursor.execute("""
-    SELECT * FROM tb_fornecedor
-    WHERE id_fornecedor = %s,""",(id_fornecedor)) #Executa a consulta SQL para verificar o códio do fornecedor
-    VerifyLogin = db.cursor.fetchone() #Obtém o resultado da consulta
-
-    #Veriricar se o usuário foi encontrado
-    if VerifyLogin:
-
-     command=DadosFornecedor
-
-    else:
-        messagebox.showinfo(title="INFO FORNECEDOR",message="Código inválido") #Exibe mensagem de erro
-
-BuscarButton = ttk.Button(FornecedorFrame,text="Buscar",width=6, command=Fornecedor) #Cria um botão de Buscar
-BuscarButton.place(x=250,y=47) #Posiciona o botão de Buscar
-
-CadastrarButton = ttk.Button(FornecedorFrame,text="Cadastrar",width=10, command=Fornecedor) #Cria um botão de Cadastrar
-CadastrarButton.place(x=5,y=100) #Posiciona o botão de Buscar
-
-RetornarButton = ttk.Button(FornecedorFrame,text="Retornar",width=8, command=Fornecedor) #Cria um botão de Retornar ao menu principal
-RetornarButton.place(x=320,y=160) #Posiciona o botão de Buscar
+FornecedorEntry = ttk.Entry(FornecedorFrame, width=10)  # Campo de entrada para o código do fornecedor
+FornecedorEntry.place(x=180, y=50)
 
 
-#FUNÇÃO PARA REGISTRAR NOVO USUÁRIO
+# Função para buscar fornecedor no banco de dados
+
 def CadastrarFornecedor():
-    #REMOVENDO BOTÕES DE LOGIN
-    #LoginButton.place(x=5000) #Move o botão de registro para fora da tela
-    #RegisterButton.place(x=5000) #Move o botão de registro para fora da tela
+    FornecedorFrame.pack_forget()  # Oculta a tela atual
+    CadastroFrame = Frame(jan, width=600, height=300, bg="PURPLE", relief="raise")  # Cria um novo frame
+    CadastroFrame.pack()
 
-    #INSERINDO WIDGETS DE CADASTRO
-    NomeLabel = Label(FornecedorFrame,text="Nome:",font=("Century Gothic",20),bg="MIDNIGHTBLUE",fg="White") #Cria um label para o nome
-    NomeLabel.place(x=5,y=5) #Psiciona o label no frame direito
+    NomeLabel = Label(CadastroFrame, text="Nome:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    NomeLabel.place(x=5, y=5)
 
-    NomeEntry = ttk.Entry(FornecedorFrame,width=30) #Posiciona o campo de entrada
-    NomeEntry.place(x=120,y=20) #Posiciona o campo de entrada
+    NomeEntry = ttk.Entry(CadastroFrame, width=30)
+    NomeEntry.place(x=120, y=10)
 
-    EmailLabel = Label(FornecedorFrame, text="Email:",font=("Century Gothic",20),bg="MIDNIGHTBLUE",fg="White") #Cria um label para o email
-    EmailLabel.place(x=5,y=40) #Posiciona o label no frame direito
+    CnpjLabel = Label(CadastroFrame, text="CNPJ:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    CnpjLabel.place(x=5, y=50)
 
-    EmailEntry = ttk.Entry(FornecedorFrame,width=30) #Cria um campo de entrada para o email
-    EmailEntry.place(x=120,y=55) #Posiciona o campo de entrada
+    CnpjEntry = ttk.Entry(CadastroFrame, width=30)
+    CnpjEntry.place(x=120, y=50)
 
-    #FUNÇÃO PARA REGISTRAR NO BANCO DE DADOS
+    EndrLabel = Label(CadastroFrame, text="Endereço:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    EndrLabel.place(x=5, y=95)
 
-def DadosFornecedor():
-       
-       FornecedorLabel.place(x=5000) #Move o label do fornecedor para fora da tela
-       FornecedorEntry.place(x=5000) #Move o campo de entrada do fornecedor para fora da tela
-       BuscarButton.place(x=5000) #Move o botão de busca para fora da tela
-       CadastrarButton.place(x=5000) #Move o botão cadastro para fora da tela
-       RetornarButton.place(x=5000) #Move o o botão de retornar para fora da tela
+    EndrEntry = ttk.Entry(CadastroFrame, width=30)
+    EndrEntry.place(x=120, y=95)
 
-       Nome_Label = Label(FornecedorFrame,text="Fornecedor:",font=("Times New Roman",18),bg="PURPLE",fg="White") #Cria um label para o nome do fornecedor
-       Nome_Label.place(x=5,y=5) #Psiciona o label no frame
+    TelLabel = Label(CadastroFrame, text="Telefone:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    TelLabel.place(x=5, y=140)
 
-       Nome_Entry = ttk.Entry(FornecedorFrame,width=30) #Posiciona o campo de entrada do nome do fornecedor
-       Nome_Entry.place(x=120,y=20) #Posiciona o campo de entrada do nome do fornecedor
+    TelEntry = ttk.Entry(CadastroFrame, width=30)
+    TelEntry.place(x=120, y=140)
 
-       CNPJ_Label = Label(FornecedorFrame, text="CNPJ:",font=("Times New Roman",18),bg="PURPLE",fg="White") #Cria um label para o cnpj
-       CNPJ_Label.place(x=5,y=40) #Posiciona o label no frame
+    EmailLabel = Label(CadastroFrame, text="Email:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    EmailLabel.place(x=5, y=185)
 
-       CNPJ_Entry = ttk.Entry(FornecedorFrame,width=30) #Cria um campo de entrada para o cnpj
-       CNPJ_Entry.place(x=120,y=55) #Posiciona o campo de entrada
+    EmailEntry = ttk.Entry(CadastroFrame, width=30)
+    EmailEntry.place(x=120, y=185)
 
-       END_Label = Label(FornecedorFrame, text="Endereço:",font=("Times New Roman",18),bg="PURPLE",fg="White") #Cria um label para o endereço
-       END_Label.place(x=5,y=40) #Posiciona o label no frame direito
+    # Botão para salvar o cadastro
+    def SalvarCadastro():
+        nm_fornecedor = NomeEntry.get()
+        cnpj_fornecedor = CnpjEntry.get()
+        end_fornecedor = EndrEntry.get()
+        tl_fornecedor = TelEntry.get()
+        email_fornecedor = EmailEntry.get()
 
-       END_Entry = ttk.Entry(FornecedorFrame,width=30) #Cria um campo de entrada para o endereço
-       END_Entry.place(x=120,y=55) #Posiciona o campo de entrada
+        if not nm_fornecedor or not cnpj_fornecedor or not end_fornecedor or not tl_fornecedor or not email_fornecedor:
+            messagebox.showwarning("Aviso", "Por favor, preencha todos os campos.")
+            return
 
-       TEL_Label = Label(FornecedorFrame, text="Telefone:",font=("Times New Roman",18),bg="PURPLE",fg="White") #Cria um label para o número de telefone
-       TEL_Label.place(x=5,y=40) #Posiciona o label no frame
+        try:
+            db = Database()
+            query = """
+            INSERT INTO tb_fornecedor (nm_fornecedor, cnpj_fornecedor, end_fornecedor, tl_fornecedor, email_fornecedor)
+            VALUES (%s, %s, %s, %s, %s)
+            """
+            values = (nm_fornecedor, cnpj_fornecedor, end_fornecedor, tl_fornecedor, email_fornecedor)
+            db.cursor.execute(query, values)  # Executa a consulta com os valores
+            db.conn.commit()  # Confirma as mudanças no banco de dados
+            messagebox.showinfo("Sucesso", "Fornecedor cadastrado com sucesso.")
+            CadastroFrame.pack_forget()
+            FornecedorFrame.pack()
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao cadastrar fornecedor: {e}")
 
-       
-       TEL_Entry = ttk.Entry(FornecedorFrame,width=30) #Cria um campo de entrada para o número de telefone
-       TEL_Entry.place(x=120,y=55) #Posiciona o campo de entrada
+    SalvarButton = ttk.Button(CadastroFrame, text="Salvar", width=10, command=SalvarCadastro)
+    SalvarButton.place(x=150, y=240)
 
-       EMAIL_Label = Label(FornecedorFrame, text="Email:",font=("Times New Roman",18),bg="PURPLE",fg="White") #Cria um label para o email
-       EMAIL_Label.place(x=5,y=40) #Posiciona o label no frame
+    VoltarButton = ttk.Button(CadastroFrame, text="Voltar", width=10, command=lambda: [CadastroFrame.pack_forget(), FornecedorFrame.pack()])
+    VoltarButton.place(x=250, y=180)
+# Função para abrir a tela de alteração de dados do fornecedor
+def AlterarFornecedor():
+    id_fornecedor = FornecedorEntry.get()  # Obtém o valor do código do fornecedor
+    if not id_fornecedor:
+        messagebox.showwarning("Aviso", "Por favor, insira o código do fornecedor para alterar.")
+        return
 
-       EMAIL_Entry = ttk.Entry(FornecedorFrame,width=30) #Cria um campo de entrada para o email
-       EMAIL_Entry.place(x=120,y=55) #Posiciona o campo de entrada
+    # Conectar ao banco de dados
+    db = Database()
+    db.cursor.execute("SELECT * FROM tb_fornecedor WHERE id_fornecedor = %s", (id_fornecedor,))
+    fornecedor = db.cursor.fetchone()
 
-# INICIAR O LOOP PRINCIPAL
-jan.mainloop() # Inicia o loop principal da aplicação
+    if not fornecedor:
+        messagebox.showwarning("Aviso", "Fornecedor não encontrado.")
+        return
+
+    # Nova janela para alterar os dados
+    AlterarJanela = Toplevel(jan)  # Cria uma nova janela
+    AlterarJanela.title("Alterar Fornecedor")
+    AlterarJanela.geometry("400x400")  # Define o tamanho da nova janela
+
+    NomeLabel = Label(AlterarJanela, text="Nome:", font=("Times New Roman", 12))
+    NomeLabel.place(x=20, y=20)
+    NomeEntry = ttk.Entry(AlterarJanela, width=30)
+    NomeEntry.place(x=100, y=20)
+    NomeEntry.insert(0, fornecedor[1])  # Preenche o campo com o nome do fornecedor
+
+    CnpjLabel = Label(AlterarJanela, text="CNPJ:", font=("Times New Roman", 12))
+    CnpjLabel.place(x=20, y=60)
+    CnpjEntry = ttk.Entry(AlterarJanela, width=30)
+    CnpjEntry.place(x=100, y=60)
+    CnpjEntry.insert(0, fornecedor[2])  # Preenche o campo com o CNPJ
+
+    EndrLabel = Label(AlterarJanela, text="Endereço:", font=("Times New Roman", 12))
+    EndrLabel.place(x=20, y=100)
+    EndrEntry = ttk.Entry(AlterarJanela, width=30)
+    EndrEntry.place(x=100, y=100)
+    EndrEntry.insert(0, fornecedor[3])  # Preenche o campo com o endereço
+
+    TelLabel = Label(AlterarJanela, text="Telefone:", font=("Times New Roman", 12))
+    TelLabel.place(x=20, y=140)
+    TelEntry = ttk.Entry(AlterarJanela, width=30)
+    TelEntry.place(x=100, y=140)
+    TelEntry.insert(0, fornecedor[4])  # Preenche o campo com o telefone
+
+    EmailLabel = Label(AlterarJanela, text="Email:", font=("Times New Roman", 12))
+    EmailLabel.place(x=20, y=180)
+    EmailEntry = ttk.Entry(AlterarJanela, width=30)
+    EmailEntry.place(x=100, y=180)
+    EmailEntry.insert(0, fornecedor[5])  # Preenche o campo com o email
+    
+
+    # Função para salvar as alterações no banco de dados
+    def SalvarAlteracoes():
+        nm_fornecedor = NomeEntry.get()
+        cnpj_fornecedor = CnpjEntry.get()
+        end_fornecedor = EndrEntry.get()
+        tl_fornecedor = TelEntry.get()
+        email_fornecedor = EmailEntry.get()
+
+        if not nm_fornecedor or not cnpj_fornecedor or not end_fornecedor or not tl_fornecedor or not email_fornecedor:
+            messagebox.showwarning("Aviso", "Por favor, preencha todos os campos.")
+            return
+
+        try:
+            db.cursor.execute("""
+                UPDATE tb_fornecedor
+                SET nm_fornecedor = %s, cnpj_fornecedor = %s, end_fornecedor = %s, tl_fornecedor = %s, email_fornecedor = %s
+                WHERE id_fornecedor = %s
+            """, (nm_fornecedor, cnpj_fornecedor, end_fornecedor, tl_fornecedor, email_fornecedor, id_fornecedor))
+            db.conn.commit()  # Confirma as mudanças no banco de dados
+            messagebox.showinfo("Sucesso", "Fornecedor atualizado com sucesso.")
+            AlterarJanela.destroy()  # Fecha a janela de alteração
+        except Exception as e:
+            messagebox.showerror("Erro", f"Erro ao atualizar fornecedor: {e}")
+
+    SalvarButton = ttk.Button(AlterarJanela, text="Salvar Alterações", command=SalvarAlteracoes)
+    SalvarButton.place(x=150, y=220)
+
+    VoltarButton = ttk.Button(AlterarJanela, text="Voltar", command=AlterarJanela.destroy)
+    VoltarButton.place(x=150, y=260)
+
+
+# Botões principais
+BuscarButton = ttk.Button(FornecedorFrame, text="Buscar", width=6, command=AlterarFornecedor)  # Botão de buscar fornecedor
+BuscarButton.place(x=250, y=47)
+
+CadastrarButton = ttk.Button(FornecedorFrame, text="Cadastrar", width=10, command=CadastrarFornecedor)  # Botão de cadastrar fornecedor
+CadastrarButton.place(x=5, y=150)
+
+RetornarButton = ttk.Button(
+    FornecedorFrame, text="Sair", width=8, command=jan.quit
+)  # Botão para fechar a aplicação
+RetornarButton.place(x=220, y=160)
+
+# Loop principal
+jan.mainloop()
