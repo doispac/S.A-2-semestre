@@ -3,6 +3,7 @@ import tkinter as ttk
 from tkinter import messagebox
 from DataBase import Database
 
+
 # Janela de Login
 jan = Tk()
 jan.title("Doceria - Login")
@@ -61,44 +62,53 @@ menuADM.configure(background="purple")
 menuADM.resizable(width=False, height=False)
 menuADM.withdraw()  # Mantém a tela oculta até o login ser realizado com sucesso
 
-# Funções para abrir as telas no menuADM
-def abrir_produto_adm():
-    menuADM.withdraw()  # Esconde o menuADM
+
+# Criação da tela menuUsuario
+menuUsuario = Toplevel()
+menuUsuario.title("Doceria - Menu Usuário")
+menuUsuario.geometry("500x400")
+menuUsuario.configure(background="purple")
+menuUsuario.resizable(width=False, height=False)
+menuUsuario.withdraw()  # Mantém a tela oculta até o login ser realizado com sucesso
+
+# Funções para abrir as telas de Produto, Fornecedor, Marca e Usuário no menuADM
+def abrir_produto():
+    menuADM.withdraw()  # Esconde o menu ADM
     menuProduto.deiconify()  # Mostra a tela de produto
 
-def abrir_usuarios_adm():
-    menuADM.withdraw()  # Esconde o menuADM
+def abrir_usuarios():
+    menuADM.withdraw()  # Esconde o menu ADM
     menuUsuarios.deiconify()  # Mostra a tela de gerenciamento de usuários
 
-def abrir_marca_adm():
-    menuADM.withdraw()  # Esconde o menuADM
+def abrir_marca():
+    menuADM.withdraw()  # Esconde o menu ADM
     menuMarca.deiconify()  # Mostra a tela de marca
 
-def abrir_fornecedor_adm():
-    menuADM.withdraw()  # Esconde o menuADM
+def abrir_fornecedor():
+    menuADM.withdraw()  # Esconde o menu ADM
     menuFornecedor.deiconify()  # Mostra a tela de fornecedor
 
-def sair_adm():
-    menuADM.withdraw()  # Esconde o menuADM
+def sair():
+    menuADM.withdraw()
     jan.deiconify()  # Volta para a tela de login
 
 # Botões para abrir as telas no menuADM
-produto_button_adm = Button(menuADM, text="Produto", font=("Time New Roman", 15), command=abrir_produto_adm)
-produto_button_adm.pack(pady=10)
+produto_button = Button(menuADM, text="Produto", font=("Time New Roman", 15), command=abrir_produto)
+produto_button.pack(pady=10)
 
-usuario_button_adm = Button(menuADM, text="Usuários", font=("Time New Roman", 15), command=abrir_usuarios_adm)
-usuario_button_adm.pack(pady=10)
+usuario_button = Button(menuADM, text="Usuários", font=("Time New Roman", 15), command=abrir_usuarios)
+usuario_button.pack(pady=10)
 
-marca_button_adm = Button(menuADM, text="Marca", font=("Time New Roman", 15), command=abrir_marca_adm)
-marca_button_adm.pack(pady=10)
+marca_button = Button(menuADM, text="Marca", font=("Time New Roman", 15), command=abrir_marca)
+marca_button.pack(pady=10)
 
-fornecedor_button_adm = Button(menuADM, text="Fornecedor", font=("Time New Roman", 15), command=abrir_fornecedor_adm)
-fornecedor_button_adm.pack(pady=10)
+fornecedor_button = Button(menuADM, text="Fornecedor", font=("Time New Roman", 15), command=abrir_fornecedor)
+fornecedor_button.pack(pady=10)
 
-Button(menuADM, text="Sair", font=("Times New Roman", 15), command=sair_adm).pack(pady=20)
+Button(menuADM, text="Sair", font=("Times New Roman", 15), command=sair).pack(pady=20)
 
-# Função para voltar ao menuADM a partir da tela Produto
-def voltar_produto_adm():
+# Função para voltar ao menu ADM a partir da tela de Produto
+def voltar_produto():
     menuProduto.withdraw()
     menuADM.deiconify()
 
@@ -113,12 +123,12 @@ menuProduto.withdraw()  # Mantém a tela oculta até o botão "Produto" ser clic
 label_produto = Label(menuProduto, text="Tela de Produto", font=("Arial", 20), bg="purple", fg="white")
 label_produto.pack(pady=50)
 
-# Botão para voltar ao menuADM
-botao_voltar_produto = Button(menuProduto, text="Voltar", font=("Arial", 15), command=voltar_produto_adm)
+# Botão para voltar ao menu ADM
+botao_voltar_produto = Button(menuProduto, text="Voltar", font=("Arial", 15), command=voltar_produto)
 botao_voltar_produto.pack(pady=20)
 
-# Função para voltar ao menuADM a partir da tela Fornecedor
-def voltar_fornecedor_adm():
+# Função para voltar ao menu ADM a partir da tela de Fornecedor
+def voltar_fornecedor():
     menuFornecedor.withdraw()
     menuADM.deiconify()
 
@@ -133,12 +143,12 @@ menuFornecedor.withdraw()  # Mantém a tela oculta até o botão "Fornecedor" se
 label_fornecedor = Label(menuFornecedor, text="Tela de Fornecedor", font=("Arial", 20), bg="purple", fg="white")
 label_fornecedor.pack(pady=50)
 
-# Botão para voltar ao menuADM
-botao_voltar_fornecedor = Button(menuFornecedor, text="Voltar", font=("Arial", 15), command=voltar_fornecedor_adm)
+# Botão para voltar ao menu ADM
+botao_voltar_fornecedor = Button(menuFornecedor, text="Voltar", font=("Arial", 15), command=voltar_fornecedor)
 botao_voltar_fornecedor.pack(pady=20)
 
-# Função para voltar ao menuADM a partir da tela Marca
-def voltar_marca_adm():
+# Função para voltar ao menu ADM a partir da tela de Marca
+def voltar_marca():
     menuMarca.withdraw()
     menuADM.deiconify()
 
@@ -153,12 +163,12 @@ menuMarca.withdraw()  # Mantém a tela oculta até o botão "Marca" ser clicado
 label_marca = Label(menuMarca, text="Tela de Marca", font=("Arial", 20), bg="purple", fg="white")
 label_marca.pack(pady=50)
 
-# Botão para voltar ao menuADM
-botao_voltar_marca = Button(menuMarca, text="Voltar", font=("Arial", 15), command=voltar_marca_adm)
+# Botão para voltar ao menu ADM
+botao_voltar_marca = Button(menuMarca, text="Voltar", font=("Arial", 15), command=voltar_marca)
 botao_voltar_marca.pack(pady=20)
 
-# Função para voltar ao menuADM a partir da tela Gerenciamento de Usuários
-def voltar_usuarios_adm():
+# Função para voltar ao menu ADM a partir da tela de Gerenciamento de Usuários
+def voltar_usuarios():
     menuUsuarios.withdraw()
     menuADM.deiconify()
 
@@ -173,9 +183,83 @@ menuUsuarios.withdraw()  # Mantém a tela oculta até o botão "Gerenciar Usuár
 label_usuarios = Label(menuUsuarios, text="Tela de Gerenciamento de Usuários", font=("Arial", 20), bg="purple", fg="white")
 label_usuarios.pack(pady=50)
 
-# Botão para voltar ao menuADM
-botao_voltar_usuarios = Button(menuUsuarios, text="Voltar", font=("Arial", 15), command=voltar_usuarios_adm)
+# Botão para voltar ao menu ADM
+botao_voltar_usuarios = Button(menuUsuarios, text="Voltar", font=("Arial", 15), command=voltar_marca)
 botao_voltar_usuarios.pack(pady=20)
+
+    
+# Criação da tela menuUsuario
+menuUsuario = Toplevel()
+menuUsuario.title("Doceria - Menu Usuário")
+menuUsuario.geometry("500x400")
+menuUsuario.configure(background="purple")
+menuUsuario.resizable(width=False, height=False)
+menuUsuario.withdraw()  # Mantém a tela oculta até o login ser realizado com sucesso
+
+# Funções para abrir as telas de Produto e Minha Conta no menuUsuario
+def abrir_produto_usuario():
+    menuUsuario.withdraw()  # Esconde o menuUsuario
+    menuProduto.deiconify()  # Mostra a tela de produto
+
+def abrir_minha_conta():
+    menuUsuario.withdraw()  # Esconde o menuUsuario
+    menuMinhaConta.deiconify()  # Mostra a tela "Minha Conta"
+
+def sair_usuario():
+    menuUsuario.withdraw()  # Esconde o menuUsuario
+    jan.deiconify()  # Volta para a tela de login
+
+# Botões para abrir as telas no menuUsuario
+produto_button_usuario = Button(menuUsuario, text="Produto", font=("Time New Roman", 15), command=abrir_produto_usuario)
+produto_button_usuario.pack(pady=10)
+
+minha_conta_button = Button(menuUsuario, text="Minha Conta", font=("Time New Roman", 15), command=abrir_minha_conta)
+minha_conta_button.pack(pady=10)
+
+Button(menuUsuario, text="Sair", font=("Times New Roman", 15), command=sair_usuario).pack(pady=20)
+
+# Função para voltar ao menuUsuario a partir da tela Produto
+def voltar_produto_usuario():
+    menuProduto.withdraw()
+    menuUsuario.deiconify()
+
+# Criação da tela Produto
+menuProduto_usuario = Toplevel()
+menuProduto_usuario.title("Doceria - Produto")
+menuProduto_usuario.geometry("500x400")
+menuProduto_usuario.configure(background="purple")
+menuProduto_usuario.resizable(width=False, height=False)
+menuProduto_usuario.withdraw()  # Mantém a tela oculta até o botão "Produto" ser clicado
+
+label_produto = Label(menuProduto_usuario, text="Tela de Produto", font=("Arial", 20), bg="purple", fg="white")
+label_produto.pack(pady=50)
+
+# Botão para voltar ao menuUsuario
+botao_voltar_produto = Button(menuProduto_usuario, text="Voltar", font=("Arial", 15), command=voltar_produto_usuario)
+botao_voltar_produto.pack(pady=20)
+
+# Função para voltar ao menuUsuario a partir da tela "Minha Conta"
+def voltar_minha_conta():
+    menuMinhaConta.withdraw()
+    menuUsuario.deiconify()
+
+# Criação da tela "Minha Conta"
+menuMinhaConta = Toplevel()
+menuMinhaConta.title("Doceria - Minha Conta")
+menuMinhaConta.geometry("500x400")
+menuMinhaConta.configure(background="purple")
+menuMinhaConta.resizable(width=False, height=False)
+menuMinhaConta.withdraw()  # Mantém a tela oculta até o botão "Minha Conta" ser clicado
+
+label_minha_conta = Label(menuMinhaConta, text="Tela de Minha Conta", font=("Arial", 20), bg="purple", fg="white")
+label_minha_conta.pack(pady=50)
+
+# Botão para voltar ao menuUsuario
+botao_voltar_minha_conta = Button(menuMinhaConta, text="Voltar", font=("Arial", 15), command=voltar_minha_conta)
+botao_voltar_minha_conta.pack(pady=20)
+
+# Loop principal da interface
+jan.mainloop()    
 
 # Loop principal da interface
 jan.mainloop()
