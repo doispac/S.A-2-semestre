@@ -2,7 +2,7 @@ from tkinter import *
 import tkinter as ttk
 from tkinter import messagebox
 from DataBase import Database
-
+import subprocess
 
 # Janela de Login
 jan = Tk()
@@ -57,19 +57,10 @@ LoginButton.place(x=150, y=150)
 # Criação da tela menuADM
 menuADM = Toplevel()
 menuADM.title("Doceria - Menu ADM")
-menuADM.geometry("500x400")
+menuADM.geometry("400x300")
 menuADM.configure(background="purple")
 menuADM.resizable(width=False, height=False)
 menuADM.withdraw()  # Mantém a tela oculta até o login ser realizado com sucesso
-
-
-# Criação da tela menuUsuario
-menuUsuario = Toplevel()
-menuUsuario.title("Doceria - Menu Usuário")
-menuUsuario.geometry("500x400")
-menuUsuario.configure(background="purple")
-menuUsuario.resizable(width=False, height=False)
-menuUsuario.withdraw()  # Mantém a tela oculta até o login ser realizado com sucesso
 
 # Funções para abrir as telas de Produto, Fornecedor, Marca e Usuário no menuADM
 def abrir_produto():
@@ -82,11 +73,13 @@ def abrir_usuarios():
 
 def abrir_marca():
     menuADM.withdraw()  # Esconde o menu ADM
+    subprocess.run(["python", "TelaMarca.py"])  # Executa o script TelaMarca.py
     menuMarca.deiconify()  # Mostra a tela de marca
 
 def abrir_fornecedor():
     menuADM.withdraw()  # Esconde o menu ADM
-    menuFornecedor.deiconify()  # Mostra a tela de fornecedor
+    subprocess.run(["python", "TelaFornecedor.py"])  # Executa o script TelaFornecedor.py
+    menuADM.deiconify()  # Reexibe o menu ADM após fechar a tela de fornecedor
 
 def sair():
     menuADM.withdraw()
@@ -105,7 +98,7 @@ marca_button.pack(pady=10)
 fornecedor_button = Button(menuADM, text="Fornecedor", font=("Time New Roman", 15), command=abrir_fornecedor)
 fornecedor_button.pack(pady=10)
 
-Button(menuADM, text="Sair", font=("Times New Roman", 15), command=sair).pack(pady=20)
+Button(menuADM, text="Sair", font=("Times New Roman", 15), command=sair).pack(pady=10)
 
 # Função para voltar ao menu ADM a partir da tela de Produto
 def voltar_produto():
@@ -184,7 +177,7 @@ label_usuarios = Label(menuUsuarios, text="Tela de Gerenciamento de Usuários", 
 label_usuarios.pack(pady=50)
 
 # Botão para voltar ao menu ADM
-botao_voltar_usuarios = Button(menuUsuarios, text="Voltar", font=("Arial", 15), command=voltar_marca)
+botao_voltar_usuarios = Button(menuUsuarios, text="Voltar", font=("Arial", 15), command=voltar_usuarios)
 botao_voltar_usuarios.pack(pady=20)
 
     
@@ -199,7 +192,7 @@ menuUsuario.withdraw()  # Mantém a tela oculta até o login ser realizado com s
 # Funções para abrir as telas de Produto e Minha Conta no menuUsuario
 def abrir_produto_usuario():
     menuUsuario.withdraw()  # Esconde o menuUsuario
-    menuProduto.deiconify()  # Mostra a tela de produto
+    menuProduto_usuario.deiconify()  # Mostra a tela de produto
 
 def abrir_minha_conta():
     menuUsuario.withdraw()  # Esconde o menuUsuario
@@ -220,7 +213,7 @@ Button(menuUsuario, text="Sair", font=("Times New Roman", 15), command=sair_usua
 
 # Função para voltar ao menuUsuario a partir da tela Produto
 def voltar_produto_usuario():
-    menuProduto.withdraw()
+    menuProduto_usuario.withdraw()
     menuUsuario.deiconify()
 
 # Criação da tela Produto
