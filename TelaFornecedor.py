@@ -6,50 +6,52 @@ from DataBase import Database  # Importa a classe Database do módulo DataBase
 # Janela principal
 jan = Tk()  # Cria uma instância da janela principal
 jan.title("Painel Fornecedor")  # Define um título para a janela
-jan.geometry("300x200")  # Define o tamanho da janela
-jan.configure(background="white")  # Configura a cor de fundo da janela
+jan.geometry("300x150")  # Define o tamanho da janela
+jan.configure(background="PURPLE")  # Configura a cor de fundo da janela
 jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
 
 # Frame para Fornecedor
-FornecedorFrame = Frame(jan, width=600, height=300, bg="PURPLE", relief="raise")  # Cria o frame principal
+FornecedorFrame = Frame(jan, width=300, height=150, bg="PURPLE", relief="raise")  # Cria o frame principal
 FornecedorFrame.pack()  # Posiciona o frame
 
 # Adicionar campos para inserir fornecedor
 FornecedorLabel = Label(
-    FornecedorFrame, text="Cod. Fornecedor:", font=("Times New Roman", 18), bg="PURPLE", fg="White"
+    FornecedorFrame, text="Cod. Fornecedor:", font=("Times New Roman", 12), bg="PURPLE", fg="White"
 )  # Label para o código do fornecedor
-FornecedorLabel.place(x=5, y=40)
+FornecedorLabel.place(x=0, y=20)
 
 FornecedorEntry = ttk.Entry(FornecedorFrame, width=10)  # Campo de entrada para o código do fornecedor
-FornecedorEntry.place(x=180, y=50)
+FornecedorEntry.place(x=120, y=23)
 
 
 # Função para buscar fornecedor no banco de dados
 
 def CadastrarFornecedor():
-    FornecedorFrame.pack_forget()  # Oculta a tela atual
-    CadastroFrame = Frame(jan, width=600, height=300, bg="PURPLE", relief="raise")  # Cria um novo frame
-    CadastroFrame.pack()
+    CadastroFrame = Toplevel(jan)  # Cria uma nova janela
+    CadastroFrame.title("Cadastrar Fornecedor")
+    CadastroFrame.geometry("400x400")  # Define o tamanho da nova janela
+    CadastroFrame.configure(background="PURPLE")  # Configura a cor de fundo da janela
+    CadastroFrame.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
 
-    NomeLabel = Label(CadastroFrame, text="Nome:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    NomeLabel = Label(CadastroFrame, text="Nome:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     NomeLabel.place(x=5, y=5)
 
     NomeEntry = ttk.Entry(CadastroFrame, width=30)
     NomeEntry.place(x=120, y=10)
 
-    CnpjLabel = Label(CadastroFrame, text="CNPJ:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    CnpjLabel = Label(CadastroFrame, text="CNPJ:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     CnpjLabel.place(x=5, y=50)
 
     CnpjEntry = ttk.Entry(CadastroFrame, width=30)
     CnpjEntry.place(x=120, y=50)
 
-    EndrLabel = Label(CadastroFrame, text="Endereço:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    EndrLabel = Label(CadastroFrame, text="Endereço:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     EndrLabel.place(x=5, y=95)
 
     EndrEntry = ttk.Entry(CadastroFrame, width=30)
     EndrEntry.place(x=120, y=95)
 
-    TelLabel = Label(CadastroFrame, text="Telefone:", font=("Times New Roman", 15), bg="PURPLE", fg="White")
+    TelLabel = Label(CadastroFrame, text="Telefone:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     TelLabel.place(x=5, y=140)
 
     TelEntry = ttk.Entry(CadastroFrame, width=30)
@@ -83,16 +85,16 @@ def CadastrarFornecedor():
             db.cursor.execute(query, values)  # Executa a consulta com os valores
             db.conn.commit()  # Confirma as mudanças no banco de dados
             messagebox.showinfo("Sucesso", "Fornecedor cadastrado com sucesso.")
-            CadastroFrame.pack_forget()
+            CadastroFrame.destroy()
             FornecedorFrame.pack()
         except Exception as e:
             messagebox.showerror("Erro", f"Erro ao cadastrar fornecedor: {e}")
-
-    SalvarButton = ttk.Button(CadastroFrame, text="Salvar", width=10, command=SalvarCadastro)
+            
+    SalvarButton = ttk.Button(CadastroFrame, text="Cadastrar", width=10, command=SalvarCadastro)
     SalvarButton.place(x=150, y=240)
 
-    VoltarButton = ttk.Button(CadastroFrame, text="Voltar", width=10, command=lambda: [CadastroFrame.pack_forget(), FornecedorFrame.pack()])
-    VoltarButton.place(x=250, y=180)
+    VoltarButton = ttk.Button(CadastroFrame, text="Voltar", width=10, command=CadastroFrame.destroy)
+    VoltarButton.place(x=150, y=275)
 # Função para abrir a tela de alteração de dados do fornecedor
 def AlterarFornecedor():
     id_fornecedor = FornecedorEntry.get()  # Obtém o valor do código do fornecedor
@@ -113,32 +115,34 @@ def AlterarFornecedor():
     AlterarJanela = Toplevel(jan)  # Cria uma nova janela
     AlterarJanela.title("Alterar Fornecedor")
     AlterarJanela.geometry("400x400")  # Define o tamanho da nova janela
+    AlterarJanela.configure(background="PURPLE")  # Configura a cor de fundo da janela
+    AlterarJanela.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
 
-    NomeLabel = Label(AlterarJanela, text="Nome:", font=("Times New Roman", 12))
+    NomeLabel = Label(AlterarJanela, text="Nome:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     NomeLabel.place(x=20, y=20)
     NomeEntry = ttk.Entry(AlterarJanela, width=30)
     NomeEntry.place(x=100, y=20)
     NomeEntry.insert(0, fornecedor[1])  # Preenche o campo com o nome do fornecedor
 
-    CnpjLabel = Label(AlterarJanela, text="CNPJ:", font=("Times New Roman", 12))
+    CnpjLabel = Label(AlterarJanela, text="CNPJ:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     CnpjLabel.place(x=20, y=60)
     CnpjEntry = ttk.Entry(AlterarJanela, width=30)
     CnpjEntry.place(x=100, y=60)
     CnpjEntry.insert(0, fornecedor[2])  # Preenche o campo com o CNPJ
 
-    EndrLabel = Label(AlterarJanela, text="Endereço:", font=("Times New Roman", 12))
+    EndrLabel = Label(AlterarJanela, text="Endereço:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     EndrLabel.place(x=20, y=100)
     EndrEntry = ttk.Entry(AlterarJanela, width=30)
     EndrEntry.place(x=100, y=100)
     EndrEntry.insert(0, fornecedor[3])  # Preenche o campo com o endereço
 
-    TelLabel = Label(AlterarJanela, text="Telefone:", font=("Times New Roman", 12))
+    TelLabel = Label(AlterarJanela, text="Telefone:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     TelLabel.place(x=20, y=140)
     TelEntry = ttk.Entry(AlterarJanela, width=30)
     TelEntry.place(x=100, y=140)
     TelEntry.insert(0, fornecedor[4])  # Preenche o campo com o telefone
 
-    EmailLabel = Label(AlterarJanela, text="Email:", font=("Times New Roman", 12))
+    EmailLabel = Label(AlterarJanela, text="Email:", font=("Times New Roman", 12), bg="PURPLE", fg="White")
     EmailLabel.place(x=20, y=180)
     EmailEntry = ttk.Entry(AlterarJanela, width=30)
     EmailEntry.place(x=100, y=180)
@@ -178,15 +182,15 @@ def AlterarFornecedor():
 
 # Botões principais
 BuscarButton = ttk.Button(FornecedorFrame, text="Buscar", width=6, command=AlterarFornecedor)  # Botão de buscar fornecedor
-BuscarButton.place(x=250, y=47)
+BuscarButton.place(x=200, y=22)
 
 CadastrarButton = ttk.Button(FornecedorFrame, text="Cadastrar", width=10, command=CadastrarFornecedor)  # Botão de cadastrar fornecedor
-CadastrarButton.place(x=5, y=150)
+CadastrarButton.place(x=120, y=60)
 
 RetornarButton = ttk.Button(
     FornecedorFrame, text="Sair", width=8, command=jan.quit
 )  # Botão para fechar a aplicação
-RetornarButton.place(x=220, y=160)
+RetornarButton.place(x=125, y=110)
 
 # Loop principal
 jan.mainloop()
