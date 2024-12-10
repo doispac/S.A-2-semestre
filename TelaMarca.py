@@ -9,7 +9,6 @@ jan.title("Painel Marca")  # Define um título para a janela
 jan.geometry("300x150")  # Define o tamanho da janela
 jan.configure(background="PURPLE")  # Configura a cor de fundo da janela
 jan.resizable(width=False, height=False)  # Impede que a janela seja redimensionada
-jan.iconbitmap("icons/bala.ico")
 
 # Frame para Fornecedor
 MarcaFrame = Frame(jan, width=300, height=150, bg="PURPLE", relief="raise")  # Cria o frame principal
@@ -126,7 +125,7 @@ def AlterarMarca():
                 UPDATE tb_marca
                 SET nm_marca = %s, tl_marca = %s
                 WHERE id_marca = %s
-            """, (nm_marca,telefone_marca))
+            """, (nm_marca,telefone_marca,id_marca))
             db.conn.commit()  # Confirma as mudanças no banco de dados
             messagebox.showinfo("Sucesso", "Marca atualizada com sucesso.")
             AlterarJanela.destroy()  # Fecha a janela de alteração
@@ -167,8 +166,6 @@ def AlterarMarca():
     #Botão para retornar a tela de pesquisar fornecedor
     VoltarButton = ttk.Button(AlterarJanela, text="Voltar", command=AlterarJanela.destroy)
     VoltarButton.place(x=320, y=350)
-
-
 
 
 # Botões principais
